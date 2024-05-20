@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISIS Portal Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('./images/students-using-tablet.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding-top: 80px; /* Space for header */
+            padding-bottom: 60px; /* Space for footer */
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #018477;
+            text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        header img {
+            max-height: 60px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Adding a slight transparency */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 900px;
+            width: 100%;
+            margin: 20px;
+            padding: 20px;
+        }
+        .inner-container {
+            display: flex;
+            flex-direction: column; /* Stack columns vertically for mobile devices */
+            width: 100%;
+            padding: 20px 0;
+        }
+        .login-section, .info-section {
+            padding: 20px;
+            flex: 1;
+            width: 100%; /* Ensure sections take full width on mobile */
+        }
+        .login-choice button,button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .staff-button, .applicant-button, .login-section button,button {
+            background-color: #018477; /* Updated button color */
+            color: #fff;
+        }
+        .staff-button:hover, .applicant-button:hover, .login-section button:hover,button {
+            background-color: #015149; /* Hover color */
+        }
+        .login-section input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .forgot-password {
+            color: black; /* Updated text color */
+        }
+        .info-text {
+            background-color: #D9EDF7;
+            font-size: 12px; /* Smaller font size */
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            color: #31708F; /* Text color to match the background */
+        }
+        .highlight {
+            background-color: #F2DEDE; /* Highlight background color */
+            padding: 10px;
+            border-radius: 4px;
+            color: #A94442;
+            text-align: justify;
+        }
+        .info-section p, .info-section div {
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+        .welcome-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            margin: 20px 0; /* Adjusted margin */
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #504C5A; /* Updated background color */
+            color: white; /* Updated text color */
+            text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+        }
+        footer a {
+            margin: 0 10px;
+            color: white; /* Updated text color */
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            font-weight: bold; /* Bold text */
+            transition: 0.4s;
+        }
+        .active, .accordion:hover {
+            background-color: #ccc;
+        }
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: white;
+            overflow: hidden;
+        }
+        h2 {
+            font-size: 18px;
+            margin-top: 0;
+        }
+        /* New styles for the sections */
+        .info-box {
+            border: 1px solid #D9EDF7;
+            margin-top: 20px;
+        }
+        .info-box-title {
+            background-color: #D9EDF7;
+            border: 1px solid #D9EDF7;
+            color: #1D4053;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .info-box-content {
+            padding: 10px;
+            text-align: justify;
+        }
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .inner-container {
+                flex-direction: row;
+            }
+            .login-section {
+                border-right: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="./images/logo.png" alt="University of Reading Logo">
+    </header>
+
+    <div class="container">
+        <div class="welcome-text">Welcome to RISIS Portal</div>
+        <div class="inner-container">
+            <div class="login-section">
+                <div class="login-choice">
+                    <button class="staff-button" onclick="showStaffLogin()">Staff and Current Students</button>
+                    <button class="applicant-button" onclick="showApplicantLogin()">Applicants and Past Students</button>
+                </div>
+
+                <div id="staff-login" style="display:none;">
+                    <h2>Staff and Current Students Login</h2>
+                    <div class="info-text">
+                        If you are a member of staff or a current student, sign in below with the same details you use to access other University systems such as email, OneDrive or MS Teams.
+                    </div>
+                    <button onclick="window.location.href='https://login.microsoftonline.com/'">Sign in with Microsoft</button>
+                </div>
+
+                <div id="applicant-login" style="display:none;">
+                    <h2>Applicants and Past Students Login</h2>
+                    <div class="info-text">
+                        Log in with your registered email address as the username and your RISIS password. If you require a password reset, please use the Forgotten your password? button below.
+                    </div>
+                    <input type="text" placeholder="Username">
+                    <input type="password" placeholder="Password">
+                    <button>Log in</button>
+                    <p><a href="#" class="forgot-password">Forgotten your password?</a></p>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>Latest news</h2>
+                <p>
+                    <div class="highlight">
+                        If you have a University email account, with a username ending in reading.ac.uk or student.reading.ac.uk, please make sure you have no text in the Username and Password boxes before clicking on the 'Staff and students sign in with Microsoft' button.
+                    </div>
+                </p>
+                <button class="accordion">Need further help logging into RISIS?</button>
+                <div class="panel">
+                    <div class="info-box">
+                        <div class="info-box-title">Staff and current students</div>
+                        <div class="info-box-content">
+                            As part of the sign in process, you will be asked to complete Multi-Factor Authentication (MFA) provided by Digital Technology Services (DTS). Further information and support can be found on the Digital Technology Services (DTS) Office 365 login page.
+                            If you are a member of University staff who requires access to RISIS for your job role and has yet to be given access, please ask your line manager to contact the Student Information Systems (SIS) Team, giving your University username.
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-box-title">Applicants and past students</div>
+                        <div class="info-box-content">
+                            You should use your registered email address as the username together with the appropriate password: please refer to guidance emailed to you. If you have logged in previously and now want to reset your login password, please use the Forgotten your password? button. For more help, please email the Student Information Systems (SIS) Team from the email address you have registered with the University.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <a href="#">Charitable status</a> |
+        <a href="#">Accessibility</a> |
+        <a href="#">Privacy policy</a> |
+        <a href="#">Cookies</a> |
+        <a href="#">Terms of use</a> |
+        <a href="#">© University of Reading</a> |
+        <a href="#">Go to top</a>
+    </footer>
+
+    <script>
+        function showStaffLogin() {
+            document.getElementById('staff-login').style.display = 'block';
+            document.getElementById('applicant-login').style.display = 'none';
+        }
+
+        function showApplicantLogin() {
+            document.getElementById('staff-login').style.display = 'none';
+            document.getElementById('applicant-login').style.display = 'block';
+        }
+
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
